@@ -1,10 +1,11 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const db = require('./utils/db');
+const authRoutes = require('./routes/auth');
+
 const app = express();
 const PORT = process.env.PORT
-const db = require('./utils/db');
-
 
 // Middleware
 app.use(express.json());
@@ -17,6 +18,8 @@ app.use((err, req, res, next) => {
 });
 
 // Routes
+
+app.use('/api', authRoutes);
 app.get('/api',(req, res) => {
     res.json({ message: 'Hello from server!' });
 });
