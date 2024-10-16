@@ -22,6 +22,9 @@ router.post("/register", async (req, res) => {
 
     // Save the user
     await newUser.save();
+
+    // Send success response
+    return res.status(201).json({ msg: "User created successfully", user: newUser });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: "Internal Server Error" });
